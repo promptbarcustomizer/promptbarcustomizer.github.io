@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Learn More - Prompt Bar Customizer</title>
+    <style>
+        :root {
+            --bg: #0e1014;
+            --panel: #17191d;
+            --text: #e6e8ec;
+            --text-muted: #9299a5;
+            --accent: #58f01b;
+            --border: #ffffff22;
+        }
+        body {
+            background-color: var(--bg);
+            color: var(--text);
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+        h1, h2, h3 {
+            color: #fff;
+        }
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            background: linear-gradient(90deg, #4285f4, #db4437, #f4b400, #0f9d58);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .subtitle {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+            margin-bottom: 40px;
+        }
+        .card {
+            background: var(--panel);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 24px;
+            margin-bottom: 24px;
+        }
+        ul {
+            padding-left: 20px;
+        }
+        li {
+            margin-bottom: 10px;
+        }
+        code {
+            background: #000000aa;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: "JetBrains Mono", monospace;
+            font-size: 0.9em;
+            color: var(--accent);
+        }
+        a {
+            color: var(--accent);
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        .footer {
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-top: 40px;
+            border-top: 1px solid var(--border);
+            padding-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Prompt Bar Customizer</h1>
+        <div class="subtitle">Documentation & Feature Guide</div>
+
+        <div class="card">
+            <h2>Welcome</h2>
+            <p>Prompt Bar Customizer allows you to completely transform the text input areas of ChatGPT, Gemini, and DeepSeek. You can apply custom backgrounds, blurs, shapes, fonts, and even custom animated cursors.</p>
+        </div>
+
+        <div class="card">
+            <h2>Feature Breakdown</h2>
+            <ul>
+                <li><strong>Glass & Liquid Glass:</strong> Apply standard CSS <code>backdrop-filter</code> blurs, or enable our experimental Liquid Glass setting for a dynamic, light-refracting SVG overlay (Chrome/Edge only).</li>
+                <li><strong>DeepSeek & Gemini Specific Fixes:</strong> The extension automatically strips solid inner backgrounds so the blur effect shines through, and fixes overlapping buttons on DeepSeek.</li>
+                <li><strong>Custom Cursors:</strong> Upload your own <code>.png</code> or <code>.cur</code> files, or import custom animated cursor libraries (<code>.pbc.cul</code>)!</li>
+                <li><strong>Geometry:</strong> Warp, rotate, or resize the prompt bar. Make it a pill, a square, or a 3D perspective box.</li>
+            </ul>
+        </div>
+
+        <div class="card">
+            <h2>Troubleshooting</h2>
+            <p>If the styling stops working, the platform (ChatGPT/Gemini/DeepSeek) likely updated their website code (DOM). We have built robust fallbacks using <code>:has()</code> selectors and shadow-root scanning to handle this, but occasional updates may be required.</p>
+            <p>If you experience performance issues, try turning off "Liquid Glass" and "Smooth Animations".</p>
+        </div>
+
+        <div class="footer">
+            &copy; 2026 Prompt Bar Customizer. May contain AI Generated content. Not affiliated with Apple, OpenAI, Google, or DeepSeek.
+        </div>
+    </div>
+
+    <script>
+        // ==========================================
+        // ANALYTICS LOGGING (Simulated for static hosts)
+        // ==========================================
+        document.addEventListener('DOMContentLoaded', () => {
+            // 1. Get the referral name from the URL (e.g., ?ref=extension)
+            const urlParams = new URLSearchParams(window.location.search);
+            const refName = urlParams.get('ref') || 'direct_visit';
+            
+            // Sanitize the name to prevent directory traversal
+            const safeName = refName.replace(/[^a-zA-Z0-9_-]/g, '');
+
+            // 2. Log to /analytics/[name].xml
+            const xmlPayload = `<?xml version="1.0" encoding="UTF-8"?>
+<visit>
+    <timestamp>${new Date().toISOString()}</timestamp>
+    <referrer>${safeName}</referrer>
+    <userAgent>${navigator.userAgent}</userAgent>
+</visit>`;
+
+            fetch(`/analytics/${safeName}.xml`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/xml' },
+                body: xmlPayload
+            }).catch(err => {
+                // This will error on GitHub Pages because it's a static host
+                console.log(`[Analytics] Pinged XML endpoint /analytics/${safeName}.xml (Static host expects 404/405)`);
+            });
+
+            // 3. Log to /analytics/index.html
+            const htmlPayload = `
+                <div class="log-entry">
+                    <p><strong>Time:</strong> ${new Date().toISOString()}</p>
+                    <p><strong>Source:</strong> ${safeName}</p>
+                    <p><strong>URL:</strong> ${window.location.href}</p>
+                </div>
+            `;
+
+            fetch('/analytics/index.html', {
+                method: 'POST',
+                headers: { 'Content-Type': 'text/html' },
+                body: htmlPayload
+            }).catch(err => {
+                // This will error on GitHub Pages
+                console.log(`[Analytics] Pinged HTML endpoint /analytics/index.html`);
+            });
+        });
+    </script>
+</body>
+</html>
