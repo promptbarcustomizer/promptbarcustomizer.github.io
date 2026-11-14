@@ -1,0 +1,37 @@
+<a href="latest.zip">Latest</a>
+<div onclick="toggleUnfold(this)" data-archive="Browzer-_lightning fast C web browser engine_-1.4.2.zip" style="cursor: pointer; user-select: none; font-family: monospace;">
+  <span class="unfold-header"><span class="unfold-name"></span>-<span class="unfold-desc" style="font-style: italic;"></span>-<span class="unfold-ver"></span>.zip <span class="unfold-arrow" style="display: inline-block; transition: transform 250ms cubic-bezier(0.4, 0, 0.2, 1);">▶</span></span>
+  <div class="unfold-content" style="display: grid; grid-template-rows: 0fr; transition: grid-template-rows 250ms cubic-bezier(0.4, 0, 0.2, 1);">
+    <div style="overflow: hidden;">
+      <div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+function autoDetectUnfold() {
+  document.querySelectorAll('div[onclick="toggleUnfold(this)"]').forEach(container => {
+    const raw = container.getAttribute('data-archive');
+    if (!raw) return;
+    
+    const match = raw.match(/^(.+?)-\_(.*?)\-(.+?)\.zip$/);
+    if (!match) return;
+
+    container.querySelector('.unfold-name').textContent = match[1];
+    container.querySelector('.unfold-desc').textContent = match[2];
+    container.querySelector('.unfold-ver').textContent = match[3];
+  });
+}
+
+function toggleUnfold(element) {
+  const content = element.querySelector('.unfold-content');
+  const arrow = element.querySelector('.unfold-arrow');
+  const isOpen = content.style.gridTemplateRows === '1fr';
+  
+  content.style.gridTemplateRows = isOpen ? '0fr' : '1fr';
+  arrow.style.transform = isOpen ? 'rotate(0deg)' : 'rotate(90deg)';
+}
+
+autoDetectUnfold();
+</script>
